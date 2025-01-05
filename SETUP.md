@@ -48,4 +48,58 @@ This allows us to use separate webpack configuration files for different modes, 
 `npm install --save-dev webpack-merge`
 
 
+## Installing ESlint
 
+`npm install --save-dev eslint @eslint/js`
+
+
+### Add an eslint.config.js file:
+
+Create JavaScript configuration file
+
+`touch eslint.config.js`
+
+import js from "@eslint/js";
+
+export default [
+    js.configs.recommended,
+
+   {
+       rules: {
+           "no-unused-vars": "warn",
+           "no-undef": "warn"
+       }
+   }
+];
+
+## Install Prettier locally:
+
+`npm install --save-dev --save-exact prettier`
+
+
+### create an empty config file to let editors and other tools know you are using Prettier:
+
+`node --eval "fs.writeFileSync('.prettierrc','{}\n')"`
+
+
+### create a .prettierignore file to let the Prettier CLI and editors know which files to not format
+
+`node --eval "fs.writeFileSync('.prettierignore','# Ignore artifacts:\nbuild\ncoverage\n')"`
+
+### Install eslint-config-prettier:
+
+`npm install --save-dev eslint-config-prettier`
+
+#### Add eslint-config-prettier to your ESLint configuration
+
+__eslint.config.js (flat config):__ Import eslint-config-prettier, and put it in the configuration array – after other configs that you want to override.
+
+```
+import someConfig from "some-other-config-you-use";
+import eslintConfigPrettier from "eslint-config-prettier";
+
+export default [
+  someConfig,
+  eslintConfigPrettier,
+];
+```
